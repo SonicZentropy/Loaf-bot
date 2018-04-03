@@ -38,24 +38,26 @@ const sqlize = new Sequelize('database', 'user', 'password', {
 	// Since we're using SQLite
 	storage: 'database.sqlite'
 });
-const Users = sqlize.define('users', {
-	id:{
-		type: Sequelize.STRING,
-		unique: true,
-		primaryKey: true,
-	},
-	pets:{
-		type: Sequelize.INTEGER,
-		defaultValue: 0,
-		allowNull: false,
-	},
-})
+const DB = {
+    Users: sqlize.define('users', {
+        id: {
+            type: Sequelize.STRING,
+            unique: true,
+            primaryKey: true,
+        },
+        pets: {
+            type: Sequelize.INTEGER,
+            defaultValue: 0,
+            allowNull: false,
+        },
+    })
+};
 // ---End DB---
 
 client.on('ready', () => {
     console.log('Discord connected. Syncing Database.');
 
-	Users.sync();
+	DB.Users.sync();
 
 	console.log('Database synced.');
 });
@@ -64,8 +66,8 @@ client.on('message', async message => {
 
 	// For debug purposes, one msg = one pet.
 	const authorID = message.author.id;
-	await Users.findOrCreate({where:{id:authorID}, defaults:{pets:0}}).spread(async function(user, created){
-		await Users.update({pets:user.pets + 1}, {where:{id:authorID}});
+	await DB.Users.findOrCreate({where:{id:authorID}, defaults:{pets:0}}).spread(async function(user, created){
+		await DB.Users.update({pets:user.pets + 1}, {where:{id:authorID}});
 	});
 
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
@@ -79,7 +81,7 @@ client.on('message', async message => {
 	const command = client.commands.get(commandName);
 
 	try{
-		command.execute(message, args, Users);
+		command.execute(message, args, DB);
 	}
 	catch(error){
 		console.error(error);
