@@ -1,7 +1,7 @@
 const fs = require('fs');	// Require the file system, used to load our commands.
 const Discord = require('discord.js');
-const { prefix } = require('./config.json');
-const { token } = require('./auth.json');
+const prefix = require('./config.json');
+const token = require('./auth.json');
 
 const client = new Discord.Client();
 
