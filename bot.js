@@ -4,8 +4,6 @@ process.on('unhandledRejection', console.error);
 const fs = require('fs');	// Require the file system, used to load our commands.
 const Path = require('path');
 const Discord = require('discord.js');
-const {prefix} = require('./config.json');
-const {token} = require('./auth.json');
 const Sequelize = require('sequelize'); 
 // Config Values
 const {prefix} = require('./config.json');
