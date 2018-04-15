@@ -1,5 +1,3 @@
-process.on('unhandledRejection', console.error);
-
 // Libraries
 const fs = require('fs');	// Require the file system, used to load our commands.
 const Path = require('path');
@@ -23,7 +21,7 @@ function readDirR(dir) {
 
 const cmdPaths = readDirR('./commands');
 for(const filePath of cmdPaths){
-	console.log("Loaded file at path " + filePath);
+	console.log("[COMMAND] Loaded command at path " + filePath);
 	const command = require(`./${filePath}`);
 	client.commands.set(command.name, command);
 }
@@ -34,6 +32,7 @@ const sqlize = new Sequelize('database', 'user', 'password', {
 	host: 'localhost',
 	dialect: 'sqlite',
 	logging: false,
+	operatorsAliases: false,
 	// Since we're using SQLite
 	storage: 'database.sqlite'
 });
