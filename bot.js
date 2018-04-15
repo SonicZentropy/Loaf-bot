@@ -89,4 +89,8 @@ client.on('message', async message => {
 
 });
 
+client.on('guildMemberAdd', (member) => {
+    member.addRole('430164694880354314')
+});
+
 client.login(token);
