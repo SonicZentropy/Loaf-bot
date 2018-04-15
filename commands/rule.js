@@ -1,5 +1,8 @@
 const rules = [
-	"What happens in Shrine of Loaf, *stays* in Shrine of Loaf."
+	"What happens in Shrine of Loaf, *stays* in Shrine of Loaf.",
+    "7ark is immune from all rules",
+    "Violators of rule #1 will be banned",
+    "Only <@99325504796000256> gets to wear a monocle and tophat."
 ];
 
 module.exports = {

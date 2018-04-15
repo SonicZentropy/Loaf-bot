@@ -48,6 +48,10 @@ const DB = {
             defaultValue: 0,
             allowNull: false,
         },
+        loaflove: {
+            type: Sequelize.INTEGER,
+            defaultValue: 0
+        },
     })
 };
 // ---End DB---
@@ -64,7 +68,7 @@ client.on('message', async message => {
 
 	// For debug purposes, one msg = one pet.
 	const authorID = message.author.id;
-	await DB.Users.findOrCreate({where:{id:authorID}, defaults:{pets:0}}).spread(async function(user, created){
+	await DB.Users.findOrCreate({where:{id:authorID}, defaults:{pets:0,test:0}}).spread(async function(user, created){
 		await DB.Users.update({pets:user.pets + 1}, {where:{id:authorID}});
 	});
 
