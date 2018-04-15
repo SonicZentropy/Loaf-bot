@@ -48,7 +48,7 @@ const DB = {
             defaultValue: 0,
             allowNull: false,
         },
-    })
+    }),
 };
 // ---End DB---
 
@@ -90,6 +90,19 @@ client.on('message', async message => {
 
 client.on('guildMemberAdd', (member) => {
     member.addRole('430164694880354314')
+});
+
+client.on('messageReactionAdd', (reaction, user) =>{
+	for(var cmd of client.commands)
+	{
+		if(typeof cmd[1].reactionString === 'undefined')
+			continue;
+		if(reaction.message.content.includes(cmd[1].reactionString))
+		{
+			//console.log("attempting onReactionRecieved call for command [" + cmd[1].name + "]");
+			cmd[1].onReactionReceived(reaction, user);
+		}
+	}
 });
 
 client.login(token);
