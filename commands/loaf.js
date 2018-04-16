@@ -29,9 +29,10 @@ module.exports = {
 		
 		// Finally, send the new loaf image
 		var sentMsg = await message.channel.send(text, {file:imgPath});
-		await sentMsg.react('🔄');
+		//await sentMsg.react('🔄');
     },
 	async onReactionReceived(reaction, user){
+        return;
 		// If this reaction was from the bot, ignore it.
 		if(user.id === "430560389013438474" || user.id === "430205652313440256")
 			return;
