@@ -7,7 +7,7 @@ module.exports = {
 		if(message.author.id !== "92838401044140032" && message.author.id !== "107967155928088576")
 			return;
 	    
-	    	await message.channel.send("Updated").react("👍");
+	    	await message.channel.send("Updated").then(function(message) { message.react("👍") });
 	    	message.delete();
 	    
 	    
