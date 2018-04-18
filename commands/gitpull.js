@@ -6,7 +6,7 @@ module.exports = {
     async execute(message, args) {
 		if(message.author.id !== "92838401044140032" && message.author.id !== "107967155928088576")
 			return;
-	    	message.react(":loaf:");
+	    	message.react("👍");
 	    
 	    
         shell.exec('git pull && node .');
