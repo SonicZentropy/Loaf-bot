@@ -93,10 +93,11 @@ client.on('ready', () => {
 
 function LoafAttack(forceIndex = -1)
 {
+    var strength = Math.floor(Math.Random()*2)+1;
     loafEmbed = new Discord.RichEmbed()
     .setColor('#0099ff')
     .setTitle('Loaf Attacks!')
-    .setDescription("Health: 100/100")
+    //.setDescription("Health: 100/100")
     .setImage("https://image.ibb.co/dhU3Z7/Loaf_Attack.png")
     .setFooter ('!pet to calm him down!');
     
@@ -108,7 +109,7 @@ function LoafAttack(forceIndex = -1)
         {embed: loafEmbed}
     );
     canAttack = true;
-    loafHealth = 100;
+    loafHealth = strength;
     usersAttacking = [];
     
     
@@ -134,7 +135,7 @@ function LoafAttack(forceIndex = -1)
             }
         clearInterval(timeOutIntervalHandle);
         
-    },30000);
+    },80000);
 }
 
 client.on('message', async message => {
@@ -178,42 +179,14 @@ client.on('message', async message => {
                         return;
                     }
                 
-                loafHealth -= 10;
-                loafEmbed.setDescription("Anger: "+loafHealth+"/100");
-                loafEmbedMessage.then((msg) => {
-                    msg.edit(loafEmbed);
-                });
-                
-                var found = false;
-                for(var key in usersAttacking)
-                    {
-                        if(usersAttacking[key].key == message.author.id)
-                            {
-                                usersAttacking[key].value += 10;
-                                found = true;
-                                break;
-                            }
-                    }
-                if(!found)
-                    {
-                        usersAttacking.push({
-                            key: message.author.id,
-                            value: 10
-                        });
-                    }
+                loafHealth -= 1;
+                //loafEmbed.setDescription("Anger: "+loafHealth+"/100");
+                //loafEmbedMessage.then((msg) => {
+                //    msg.edit(loafEmbed);
+                //});
                 
                 if(loafHealth <= 0)
                     {
-                        var winningID;
-                        var highest = 0;
-                        for(var key in usersAttacking)
-                            {
-                                if(usersAttacking[key].value > highest)
-                                    {
-                                        winningID = usersAttacking[key].key;
-                                        highest = usersAttacking[key].value;
-                                    }
-                            }
                         loafEmbed
                             .setImage("https://image.ibb.co/kZSoj7/loaf123.png")
                             .setDescription("Happy! :)")
@@ -221,9 +194,9 @@ client.on('message', async message => {
                         loafEmbedMessage.then((msg) => {
                             msg.edit(loafEmbed);
                         })
-                        message.channel.send("<@"+winningID+"> has calmed Loaf! They have gained some Loaf Love");
-                        await DB.Users.findOrCreate({where:{id:winningID}, defaults:{loaflove:0}}).spread(async function(user, created){
-	                   	   await DB.Users.update({loaflove:user.loaflove + 1}, {where:{id:winningID}});
+                        message.channel.send("<@"+authorID+"> has calmed Loaf! They have gained some Loaf Love");
+                        await DB.Users.findOrCreate({where:{id:authorID}, defaults:{loaflove:0}}).spread(async function(user, created){
+	                   	   await DB.Users.update({loaflove:user.loaflove + 1}, {where:{id:authorID}});
 	                    });
                         canAttack = false;
                     }
