@@ -69,7 +69,7 @@ var loafHealth = 100;
 var usersAttacking = [];
 var canAttack = false;
 
-var attackChannelIds = [ "430208289234747393", "430040785178853376" ]; //Bot-testing, loaf-discussion
+var attackChannelIds = [ "435978332899770378", "430040785178853376" ]; //Loaf-fun, loaf-discussion
 
 var currentIntervalHandle;
 var timeOutIntervalHandle;
