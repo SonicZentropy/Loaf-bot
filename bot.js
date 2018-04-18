@@ -56,6 +56,7 @@ const DB = {
 };
 // ---End DB---
 
+// ---Loaf Minigame---
 var loafInterval = 1000000;
 var maxLoafAttacks = 100000;
 var currentLoafAttacks = 0;
@@ -70,6 +71,12 @@ var attackChannelIds = [ "430208289234747393", "430040785178853376" ]; //Bot-tes
 
 var currentIntervalHandle;
 var timeOutIntervalHandle;
+// ---End Loaf---
+
+// ---Bot Constants---
+//						All Might
+const ImageBlacklist = ["191372589484998656"];
+// ---End Constants---
 
 client.on('ready', () => {
     console.log('Discord connected. Syncing Database.');
@@ -135,6 +142,20 @@ client.on('message', async message => {
 		await DB.Users.update({pets:user.pets + 1}, {where:{id:authorID}});
 	});
 
+	// Do image blacklisting (basically block certain users from sending images)
+	if(ImageBlacklist.includes(message.author.id))
+	{
+		var hasEmbedImage = (message.embeds.length > 0 && typeof message.embeds[0].image !== 'undefined');
+		var hasAttachedImage = (message.attachments.array().length > 0);
+		
+		if(hasEmbedImage || hasAttachedImage)
+		{
+			// It had an image.
+			await message.delete();
+			return;
+		}
+	}
+	
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
 	const args = message.content.slice(prefix.length).split(/ +/);
