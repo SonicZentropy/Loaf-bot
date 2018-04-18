@@ -10,8 +10,12 @@ module.exports = {
 	    	await message.channel.send("Updated").then(function(message) { message.react("👍") });
 	    	message.delete();
 	    
-	    
+	    try
+	    {
         shell.exec('git pull && node .');
 		process.exit();
+	    }
+	    catch(err)
+		    message.channel.send(err);
     },
 };
