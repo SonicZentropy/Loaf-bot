@@ -84,7 +84,7 @@ client.on('ready', () => {
 	
     console.log('Discord connected. Syncing Database.');
     
-    currentIntervalHandle = setInterval(function() {LoafAttack()},loafInterval/4);
+    currentIntervalHandle = setInterval(function() {LoafAttack()},100);//loafInterval/4);
     
 	DB.Users.sync();
 
