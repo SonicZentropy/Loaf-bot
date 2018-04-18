@@ -56,7 +56,7 @@ const DB = {
 };
 // ---End DB---
 
-var loafInterval = 1000000;
+var loafInterval = 4000000;
 var maxLoafAttacks = 100000;
 var currentLoafAttacks = 0;
 var loafEmbed;
@@ -66,7 +66,7 @@ var loafHealth = 100;
 var usersAttacking = [];
 var canAttack = false;
 
-var attackChannelIds = [ "430208289234747393", "430040785178853376" ]; //Bot-testing, loaf-discussion
+var attackChannelIds = [ "430040785178853376" ]; //Bot-testing, loaf-discussion "430208289234747393"
 
 var currentIntervalHandle;
 var timeOutIntervalHandle;
@@ -124,7 +124,7 @@ function LoafAttack(forceIndex = -1)
             }
         clearInterval(timeOutIntervalHandle);
         
-    },30000);
+    },60000);
 }
 
 client.on('message', async message => {
