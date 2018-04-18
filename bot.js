@@ -3,9 +3,11 @@ const fs = require('fs');	// Require the file system, used to load our commands.
 const Path = require('path');
 const Discord = require('discord.js');
 const Sequelize = require('sequelize'); 
+const shell = require('shelljs');
 // Config Values
 const {prefix} = require('./config.json');
 const {token} = require('./auth.json');
+const IsDeployedVersion = fs.existsSync("./Deployed.txt");	// If this is the deployed version of the bot with auto updating.
 
 // Client init
 const client = new Discord.Client();
@@ -79,6 +81,7 @@ const ImageBlacklist = ["191372589484998656"];
 // ---End Constants---
 
 client.on('ready', () => {
+	
     console.log('Discord connected. Syncing Database.');
     
     currentIntervalHandle = setInterval(function() {LoafAttack()},loafInterval/4);
