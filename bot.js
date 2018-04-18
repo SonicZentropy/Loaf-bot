@@ -93,7 +93,7 @@ client.on('ready', () => {
 
 function LoafAttack(forceIndex = -1)
 {
-    var strength = Math.floor(Math.Random()*2)+1;
+    var strength = Math.floor(Math.random()*2)+1;
     loafEmbed = new Discord.RichEmbed()
     .setColor('#0099ff')
     .setTitle('Loaf Attacks!')
