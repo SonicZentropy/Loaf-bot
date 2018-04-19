@@ -1,24 +1,23 @@
 const fs = require("fs");
 const path = require("path");
 
-const images = [
-    "./LoafImages/Loaf.png",
-    "./LoafImages/Loaf2.png",
-    "./LoafImages/Loaf3.png"
-]
-
-const reactionText = [
-    "has summoned Loaf!",
-    "has summoned King Loaf! All bow before the king! :crown:"
-]
+let prevID = "";
 
 module.exports = {
     name: 'loaf',
     description: 'ItsLoaf',
     reactionString: "has summoned",
 	async execute(message, args) {
-		// First, delete the loaf message. We don't need it floating around.
+		// First, delete the !loaf message. We don't need it floating around.
 		await message.delete();
+		
+		// Now, search for an old loaf message, if it exists, delete it.
+		if(prevID !== "")
+		{
+			message.channel.fetchMessage(prevID)
+  				.then(message => message.delete())
+  				.catch();
+		}
 		
 		var folder = fs.readdirSync("./LoafImages/");
 		var randomIndex = Math.floor(Math.random() * folder.length);
@@ -48,6 +47,7 @@ module.exports = {
         var text = "<@"+user.id+"> "+reactionText[index];
 		
 		var sentMsg = await reaction.message.channel.send(text, {file:imgPath});
+		prevID = sentMsg.id;
 		await sentMsg.react('🔄');
 	},
 };
