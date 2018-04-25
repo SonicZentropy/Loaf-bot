@@ -3,7 +3,9 @@ const rules = [
     "7ark is immune from all rules",
     "Violators of rule #1 will be banned",
     "Only <@99325504796000256> gets to wear a monocle and tophat.",
-    "My rules don't have to make sense."
+    "My rules don't have to make sense.",
+    "If you post something NSFW in any channel other than #not-safe-for-work I will fucking ban you.",
+    "No assholes or annoying people allowed. This place is for fun."
 ];
 
 module.exports = {

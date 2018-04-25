@@ -3,6 +3,8 @@ const path = require("path");
 
 let prevID = "";
 
+const reactionText = [ "has summoned Loaf!", " has summoned King Loaf! :crown: All bow before his majesty! :crown:" ]
+
 module.exports = {
     name: 'loaf',
     description: 'ItsLoaf',
@@ -19,9 +21,13 @@ module.exports = {
   				.catch();
 		}
 		
+        
 		var folder = fs.readdirSync("./LoafImages/");
 		var randomIndex = Math.floor(Math.random() * folder.length);
+        if(args.length != 0 && args[0].toLowerCase() == "king")
+            randomIndex = 2;
 		var imgPath = "./LoafImages/" + path.basename(folder[randomIndex]);
+        
 		
         var index = randomIndex==2 ? 1 : 0;
         var text = "<@"+message.author.id+"> "+reactionText[index];
