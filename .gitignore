@@ -2,3 +2,4 @@
 auth\.json
 
 config\.json
+/database.sqlite
