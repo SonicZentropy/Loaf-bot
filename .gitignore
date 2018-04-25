@@ -1,5 +1,7 @@
-
+database.sqlite
+database.sqlite-journal
 auth\.json
 
 config\.json
 /database.sqlite
+/node_modules
