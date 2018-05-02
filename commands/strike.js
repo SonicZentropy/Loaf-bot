@@ -7,7 +7,7 @@ module.exports = {
     description: 'Give out strikes. The power is vested in me.',
     async execute(message, args, db,client, override, original) {
         message.delete();
-        const userId = message.mentions.users.first() != null ? message.mentions.users.first().id : message.author.id;
+        const userId = message.mentions.users.first() != null && override != 2 ? message.mentions.users.first().id : message.author.id;
         const user = await db.Users.findOne({where:{id:userId}});
         if(args.length >= 2)
             {

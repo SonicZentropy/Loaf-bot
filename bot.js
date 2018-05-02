@@ -83,6 +83,9 @@ var usersAttacking = [];
 var canAttack = false;
 
 var attackChannelIds = [ "435978332899770378", "430040785178853376" ]; //Loaf-fun, loaf-discussion
+var programmingChannel = "435172707886432267";
+var pollChannel = "430208289234747393"//"430543422512955392";
+var pollvoterId = "439205393273716746"//"439141548274221077"
 
 var currentIntervalHandle;
 var timeOutIntervalHandle;
@@ -167,12 +170,10 @@ client.on('messageUpdate', async (original, message) => {
 });
 
 client.on('message', async message => {
+    var authorID = message.author.id;
 
-	// For debug purposes, one msg = one pet.
-	const authorID = message.author.id;
-	await DB.Users.findOrCreate({where:{id:authorID}, defaults:{pets:0,test:0}}).spread(async function(user, created){
-		await DB.Users.update({pets:user.pets + 1}, {where:{id:authorID}});
-	});
+    if(message.channel.id == programmingChannel)
+        return;
     
     if(message.content.includes("!strikes"))
         {
@@ -183,7 +184,7 @@ client.on('message', async message => {
     var originalMessage = message.content;
     
 	// Do image blacklisting (basically block certain users from sending images)
-	if(ImageBlacklist.includes(message.author.id))
+	if(ImageBlacklist.includes(message.author.id) && message.channel.id != "436206950729121832" && message.channel.id != "439193193771171840")
 	{
 		var hasEmbedImage = (message.embeds.length > 0 && typeof message.embeds[0].image !== 'undefined');
 		var hasAttachedImage = (message.attachments.array().length > 0);
@@ -199,7 +200,7 @@ client.on('message', async message => {
     
     if(!message.guild.members.get(message.author.id).roles.has(myRole) && (message.content.toLowerCase().includes("hate") || message.content.toLowerCase().includes("evil") || message.content.toLowerCase().includes("fuck")) && (message.content.toLowerCase().includes(" cat") || message.content.toLowerCase().includes("loaf")))
 	{
-       message.content = "!strike give <@"+message.author.id+">";
+       message.content = "!strike give <@"+authorID+">";
         override= 2;
     }
        
