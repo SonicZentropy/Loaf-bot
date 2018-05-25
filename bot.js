@@ -198,7 +198,7 @@ client.on('message', async message => {
 		}
 	}
     
-    if(!message.guild.members.get(message.author.id).roles.has(myRole) && (message.content.toLowerCase().includes("hate") || message.content.toLowerCase().includes("evil") || message.content.toLowerCase().includes("fuck")) && (message.content.toLowerCase().includes(" cat") || message.content.toLowerCase().includes("loaf")))
+    if(!message.guild.members.get(message.author.id).roles.has(myRole) && (message.content.toLowerCase().includes("hate") || message.content.toLowerCase().includes("evil") || message.content.toLowerCase().includes("fuck")) && (message.content.toLowerCase().includes(" cat ") || message.content.toLowerCase().includes(" cats ") || message.content.toLowerCase().includes("loaf")))
 	{
        message.content = "!strike give <@"+authorID+">";
         override= 2;
